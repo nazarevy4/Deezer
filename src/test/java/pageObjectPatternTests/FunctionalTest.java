@@ -16,7 +16,7 @@ public class FunctionalTest {
 
     @BeforeClass
     public static void setUp(){
-        System.setProperty("webdriver.gecko.driver","/home/nazik/Documents/geckodriver");
+        System.setProperty("webdriver.gecko.driver","C:\\Users\\Nazarii_Stukalo\\Documents\\geckodriver\\geckodriver.exe");
     }
 
     @Before
