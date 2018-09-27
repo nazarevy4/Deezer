@@ -14,7 +14,7 @@ public class DeezerMainPage extends PageObject {
         super(driver);
     }
 
-    public boolean confiramtion () {
+    public boolean userIsLoggedIn () {
         return deezerApp.isEnabled();
     }
 }

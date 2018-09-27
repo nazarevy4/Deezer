@@ -37,6 +37,10 @@ public class SignInPage extends PageObject {
         return new DeezerMainPage(driver);
     }
 
+    public boolean loginErrorIsPresent () {
+        return loginError.isEnabled();
+    }
+
     public boolean errorConfirm () {
         return signInButton.isEnabled();
     }

@@ -2,17 +2,12 @@ package cucumberTest;
 
 import applicationPages.DeezerMainPage;
 import applicationPages.SignInPage;
-import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
 import cucumber.api.java8.En;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertTrue;
 
 public class StepDefinition implements En {
     public WebDriver driver;
@@ -20,26 +15,38 @@ public class StepDefinition implements En {
     SignInPage signInPage;
 
     public StepDefinition() {
-        Given("^deezer login page is opened$", () -> {
+        Before(() -> {
             System.setProperty("webdriver.gecko.driver","C:\\Users\\Nazarii_Stukalo\\Documents\\geckodriver\\geckodriver.exe");
             driver = new FirefoxDriver();
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        });
+
+        After(() -> {
+            driver.close();
+        });
+
+
+        Given("^deezer login page is opened$", () -> {
             driver.get("https://www.deezer.com/login");
-
         });
 
-        When("^valid creds are passed$", () -> {
+        When("^user enters login \"([^\"]*)\" and password \"([^\"]*)\"$", (String login, String password) -> {
             signInPage = new SignInPage(driver);
-            signInPage.enterMail("nazar.stukalo@yahoo.com");
-            signInPage.enterPassword("password!@#");
-            deezerMainPage = signInPage.submit();
-
+            signInPage.enterMail(login);
+            signInPage.enterPassword(password);
+            signInPage.submit();
         });
+
 
         Then("^user is logged in$", () -> {
-                Assert.assertTrue(deezerMainPage.confiramtion());
-
+            deezerMainPage = new DeezerMainPage(driver);
+            Assert.assertTrue(deezerMainPage.userIsLoggedIn());
         });
+
+        Then("^user is not logged in$", () -> {
+            Assert.assertTrue(signInPage.loginErrorIsPresent());
+        });
+
 
     }
 }

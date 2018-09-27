@@ -14,7 +14,7 @@ public class SignInFormTest extends  FunctionalTest {
         signInPage.enterMail("nazar.stukalo@yahoo.com");
         signInPage.enterPassword("password!@#");
         DeezerMainPage deezerMainPage = signInPage.submit();
-        assertTrue(deezerMainPage.confiramtion());
+        assertTrue(deezerMainPage.userIsLoggedIn());
 
     }
 

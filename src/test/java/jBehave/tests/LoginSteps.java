@@ -14,46 +14,39 @@ public class LoginSteps extends Steps{
     DeezerMainPage deezerMainPage;
     SignInPage signInPage;
 
-    @Given("deezer login page is opened")
-    public void givenASystemState() {
-        System.setProperty("webdriver.gecko.driver","C:\\Users\\Nazarii_Stukalo\\Documents\\geckodriver\\geckodriver.exe");
-        driver = new FirefoxDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://www.deezer.com/login");
+    @Given("page \"$keyword\" is opened")
+    public void openPage(String url) {
+        driver.get(url);
     }
 
-    @When("valid creds are passed")
-    public void whenIDoSomething() {
+    @When("mail \"$keyword\" and  \"$keyword\" password are passed")
+    public void passParameters(String mail, String pass) {
         signInPage = new SignInPage(driver);
-        signInPage.enterMail("nazar.stukalo@yahoo.com");
-        signInPage.enterPassword("password!@#");
+        signInPage.enterMail(mail);
+        signInPage.enterPassword(pass);
         deezerMainPage = signInPage.submit();
     }
 
-    @When("not valid creds are passed")
-    public void whenIDoSomethingelse() {
-        SignInPage signInPage = new SignInPage(driver);
-        signInPage.enterMail("nazar.stukalo@yahoo.com");
-        signInPage.enterPassword("passwrd!@#");
-        signInPage.submit();
-
-
-    }
-
     @Then("user is logged in")
-    public void thenSystemIsInADifferentState() {
-        Assert.assertTrue(deezerMainPage.confiramtion());
+    public void deesAppIsOpened() {
+        Assert.assertTrue(deezerMainPage.userIsLoggedIn());
     }
 
     @Then("user is not logged in")
-    public void thenSystemIsInADifferentStatetest() {
-        Assert.assertFalse(deezerMainPage.confiramtion());
+    public void errorMessageAppears() {
+        Assert.assertTrue(signInPage.loginErrorIsPresent());
     }
 
 
+    @BeforeStory
+    public void setBrowser () {
+        System.setProperty("webdriver.gecko.driver", "C:\\Users\\Nazarii_Stukalo\\Documents\\geckodriver\\geckodriver.exe");
+        driver = new FirefoxDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
 
     @AfterStory
-    public void afterStories() {
+    public void closeBrowser() {
         driver.close();
     }
 

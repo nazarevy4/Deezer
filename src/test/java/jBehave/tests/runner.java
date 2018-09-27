@@ -24,16 +24,6 @@ public class runner extends JUnitStories {
         return new MostUsefulConfiguration()
                 .useStoryReporterBuilder(new StoryReporterBuilder()
                         .withFormats(Format.CONSOLE));
-
-//        return new MostUsefulConfiguration()
-//                .useStoryLoader(
-//                        new LoadFromClasspath(this.getClass().getClassLoader()))
-//                .useStoryReporterBuilder(
-//                        new StoryReporterBuilder()
-//                                .withDefaultFormats()
-//                                .withFormats(Format.HTML, Format.CONSOLE)
-//                                .withRelativeDirectory("jbehave-report")
-//                );
     }
 
     @Override
