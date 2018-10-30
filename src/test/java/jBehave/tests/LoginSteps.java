@@ -40,7 +40,8 @@ public class LoginSteps extends Steps{
 
     @BeforeStory
     public void setBrowser () {
-        System.setProperty("webdriver.gecko.driver", "C:\\Users\\Nazarii_Stukalo\\Documents\\geckodriver\\geckodriver.exe");
+//        System.setProperty("webdriver.gecko.driver", "C:\\Users\\Nazarii_Stukalo\\Documents\\geckodriver\\geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver","./src/test/resources/drivers/geckodriver.exe");
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
