@@ -16,8 +16,8 @@ public class FunctionalTest {
 
     @BeforeClass
     public static void setUp(){
-//        System.setProperty("webdriver.gecko.driver","C:\\Users\\Nazarii_Stukalo\\Documents\\geckodriver\\geckodriver.exe");
-        System.setProperty("webdriver.gecko.driver","./src/test/resources/drivers/geckodriver.exe");
+//                        System.setProperty("webdriver.gecko.driver","./src/test/resources/drivers/geckodriver.exe"); //windows
+        System.setProperty("webdriver.gecko.driver","./src/test/resources/drivers/geckodriver"); //ubuntu
 
     }
 
